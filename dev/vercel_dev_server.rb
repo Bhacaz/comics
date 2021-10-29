@@ -17,6 +17,7 @@ Dir['./api/**/*.rb'].each do |file_path|
         #{File.read(file_path)}
         class WEBrickHandler < WEBrick::HTTPServlet::AbstractServlet
           def do_GET(req, res)
+            res.header['Access-Control-Allow-Origin'] = '*'
             Handler.call(req, res)
           end
           alias do_POST do_GET
