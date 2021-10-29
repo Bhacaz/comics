@@ -7,3 +7,4 @@ Handler = Proc.new do |req, res|
   res['Content-Type'] = 'application/json; charset=utf-8'
   res.body = query_string.to_json
 end
+
