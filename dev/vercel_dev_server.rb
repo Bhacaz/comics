@@ -1,30 +1,40 @@
 # frozen_string_literal: true
 
+# Inspiration
+# https://github.com/gior/vercel-dev-ruby/blob/master/dev/server.rb
+
 require 'webrick'
-# HEYDEV! require your functions here
-require_relative '../api/date'
 
-# puts `pwd`
-# Dir['./api'].each do |file_path|
-#   handler_content = File.read(file_path)
-# end
+class_handlers = {}
 
-module WEBrick
-  module HTTPServlet
-    class FileHandler
-      alias do_POST do_GET
-    end
-  end
+API_PATH_REGEX = %r{api/(.+)\.rb}.freeze
+
+Dir['./api/**/*.rb'].each do |file_path|
+  api_path = API_PATH_REGEX.match(file_path).captures[0]
+  new_module = Module.new
+  new_module.module_eval(
+    <<-RUBY, __FILE__, __LINE__ + 1
+        #{File.read(file_path)}
+        class WEBrickHandler < WEBrick::HTTPServlet::AbstractServlet
+          def do_GET(req, res)
+            Handler.call(req, res)
+          end
+          alias do_POST do_GET
+        end
+  RUBY
+  )
+
+  class_handlers[api_path] = new_module::WEBrickHandler
 end
 
 root = File.expand_path '.'
 server = WEBrick::HTTPServer.new Port: 8000, DocumentRoot: root
 
-# Define endpoints
-# HEYDEV! use yours here
-server.mount '/api/date', TestWR::Handler
+class_handlers.each do |function, handler|
+  server.mount "/api/#{function}", handler
+end
 
 # Start the server
-trap 'INT' do server.shutdown end
+trap('INT') { server.shutdown }
 
 server.start
