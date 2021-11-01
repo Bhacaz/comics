@@ -38,7 +38,7 @@ export default {
   },
   mounted() {
     this.$watch("search", () => {
-      fetch("http://localhost:8000/api/search?query=" + this.search)
+      fetch("/api/search?query=" + this.search)
         .then((res) => res.json())
         .then((result) => {
           this.searchResults = result.slice(0, 10);

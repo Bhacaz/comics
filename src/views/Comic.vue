@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     fetchComicData() {
-      fetch("http://localhost:8000/api/comic?id=" + this.$route.params.id)
+      fetch("/api/comic?id=" + this.$route.params.id)
         .then((res) => res.json())
         .then((result) => {
           this.comicData = result;
