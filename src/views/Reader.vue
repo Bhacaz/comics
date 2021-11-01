@@ -5,7 +5,7 @@
     <button class="button is-dark" @click="changePage(1)">Next</button>
   </div>
   <div id="image-container">
-    <img class="page" v-bind:src="basePageSrc + '0' + pageNumber + '.jpg'" />
+    <img class="page" v-bind:src="baseComicPage + '0' + pageNumber + '.jpg'" />
   </div>
 </template>
 
@@ -13,8 +13,12 @@
 export default {
   data() {
     return {
-      basePageSrc:
-        "https://readcomicsonline.ru/uploads/manga/infinity-gauntlet-19911992/chapters/1/",
+      baseComicPage:
+        "https://readcomicsonline.ru/uploads/manga/" +
+        this.$route.params.id +
+        "/chapters/" +
+        this.$route.params.chapterId +
+        "/",
       pageNumber: 1,
     };
   },
@@ -23,6 +27,7 @@ export default {
       this.pageNumber += direction;
     },
   },
+  created() {},
 };
 </script>
 

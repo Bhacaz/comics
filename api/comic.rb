@@ -59,6 +59,7 @@ Handler = proc do |req, res|
     }
   end
   data[:chapters].sort_by! { |chapter| chapter[:number].to_i }
+  data[:id] = params['id']
 
   res.status = 200
   res['Content-Type'] = 'text/text; charset=utf-8'
