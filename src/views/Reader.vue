@@ -1,11 +1,16 @@
 <template>
-  <div id="navigation">
-    <button class="button is-dark" @click="changePage(-1)">Previous</button>
-    <span>{{ pageNumber }}</span>
-    <button class="button is-dark" @click="changePage(1)">Next</button>
-  </div>
-  <div id="image-container">
-    <img class="page" v-bind:src="baseComicPage + '0' + pageNumber + '.jpg'" />
+  <div id="reader">
+    <div id="navigation">
+      <button class="button is-dark" @click="changePage(-1)">Previous</button>
+      <span>{{ parseInt(pageNumber) }}</span>
+      <button class="button is-dark" @click="toggleFullscreen()">
+        Fullscreen
+      </button>
+      <button class="button is-dark" @click="changePage(1)">Next</button>
+    </div>
+    <div id="image-container">
+      <img class="page" v-bind:src="baseComicPage + pageNumber + '.jpg'" />
+    </div>
   </div>
 </template>
 
@@ -19,12 +24,41 @@ export default {
         "/chapters/" +
         this.$route.params.chapterId +
         "/",
-      pageNumber: 1,
+      pageNumber: "01",
+      isFullScreen: false,
     };
   },
   methods: {
     changePage(direction) {
-      this.pageNumber += direction;
+      let newPage = parseInt(this.pageNumber) + direction;
+      this.formattedPageNumber(newPage);
+    },
+    formattedPageNumber(newPage) {
+      const stringPageNumber = newPage.toString();
+      if (stringPageNumber.length === 1) {
+        this.pageNumber = "0" + stringPageNumber;
+      } else {
+        this.pageNumber = stringPageNumber;
+      }
+    },
+    toggleFullscreen() {
+      if (!this.isFullScreen) {
+        if (this.$el.requestFullscreen) {
+          this.$el.requestFullscreen();
+        } else if (this.$el.webkitRequestFullscreen) {
+          /* Safari */
+          this.$el.webkitRequestFullscreen();
+        }
+        this.isFullScreen = true;
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          /* Safari */
+          document.webkitExitFullscreen();
+        }
+        this.isFullScreen = false;
+      }
     },
   },
   created() {},
