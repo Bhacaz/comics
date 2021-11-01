@@ -16,7 +16,7 @@ COVER_URL_REGEX = %r{'(//.+/cover/.+?)'}.freeze
 
 class BuildComicData
   def self.single_match(content, regex)
-    content.match(regex).captures[0]
+    content.match(regex)&.captures&.first
   end
 
   def self.multi_match(content, regex)
@@ -58,7 +58,7 @@ Handler = proc do |req, res|
       url: url
     }
   end
-  data[:chapters].sort_by! { |chapter| chapter[:number] }
+  data[:chapters].sort_by! { |chapter| chapter[:number].to_i }
 
   res.status = 200
   res['Content-Type'] = 'text/text; charset=utf-8'

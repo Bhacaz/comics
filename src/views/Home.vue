@@ -14,15 +14,14 @@
       v-model="search"
     />
     <nav class="panel">
-      <a
+      <router-link
         class="panel-block"
         v-for="result in searchResults"
         v-bind:key="result.data"
-        target="”_blank”"
-        v-bind:href="'https://readcomicsonline.ru/comic/' + result.data"
+        :to="'/comic/' + result.data"
       >
         {{ result.value }}
-      </a>
+      </router-link>
     </nav>
   </section>
 </template>
@@ -39,9 +38,7 @@ export default {
   },
   mounted() {
     this.$watch("search", () => {
-      fetch("http://localhost:8000/api/search?query=" + this.search, {
-        headers: { Origin: "https://readcomicsonline.ru" },
-      })
+      fetch("http://localhost:8000/api/search?query=" + this.search)
         .then((res) => res.json())
         .then((result) => {
           this.searchResults = result.slice(0, 10);
