@@ -9,20 +9,28 @@
           <h2 class="title is-2">{{ comicData.title }}</h2>
         </div>
         <div><strong>Summary:</strong> {{ comicData.summary }}</div>
+        <div><strong>Type:</strong> {{ comicData.type }}</div>
         <div><strong>Release:</strong> {{ comicData.date_of_release }}</div>
         <div><strong>Rating:</strong> {{ comicData.rating }}/5</div>
         <div><strong>Status:</strong> {{ comicData.status }}</div>
+        <div>
+          <strong>Source:</strong>
+          <a v-bind:href="`https://readcomicsonline.ru/comic/${comicData.id}`"
+            >Read Comics Online</a
+          >
+        </div>
       </div>
     </div>
   </section>
-  <section class="section">
-    <p v-for="chapter of comicData.chapters" v-bind:key="chapter.number">
-      <router-link
-        :to="'/reader/' + comicData.id + '/' + chapter.number + '/1'"
-      >
-        {{ chapter.name }}
-      </router-link>
-    </p>
+  <section v-if="comicData" class="section" id="chapters">
+    <router-link
+      class="button chapter-link"
+      v-for="chapter of comicData.chapters"
+      v-bind:key="chapter.number"
+      :to="'/reader/' + comicData.id + '/' + chapter.number + '/1'"
+    >
+      #{{ chapter.number }}
+    </router-link>
   </section>
 </template>
 
@@ -51,4 +59,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.chapter-link {
+  margin: 0.5em;
+}
+
+#chapters {
+  display: flex;
+  flex-wrap: wrap;
+}
+</style>
