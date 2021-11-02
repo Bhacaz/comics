@@ -38,7 +38,8 @@ export default {
   },
   mounted() {
     this.$watch("search", () => {
-      fetch("/api/search?query=" + this.search)
+      console.log(process.env);
+      fetch(process.env.VUE_APP_BASE_API + "/api/search?query=" + this.search)
         .then((res) => res.json())
         .then((result) => {
           this.searchResults = result.slice(0, 10);

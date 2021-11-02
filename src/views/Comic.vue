@@ -37,7 +37,9 @@ export default {
   },
   methods: {
     fetchComicData() {
-      fetch("/api/comic?id=" + this.$route.params.id)
+      fetch(
+        process.env.VUE_APP_BASE_API + "/api/comic?id=" + this.$route.params.id
+      )
         .then((res) => res.json())
         .then((result) => {
           this.comicData = result;
