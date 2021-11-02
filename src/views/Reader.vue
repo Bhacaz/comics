@@ -4,7 +4,13 @@
       <img class="page" v-bind:src="baseComicPage + pageNumber + '.jpg'" />
     </div>
     <div id="overlay-control">
-      <div id="top-control" @click="toggleFullscreen()"></div>
+      <div class="columns">
+        <div
+          id="top-control"
+          class="column is-full"
+          @click="toggleFullscreen2()"
+        ></div>
+      </div>
       <div id="left-right-control-container" class="columns">
         <div
           id="left-control"
@@ -22,6 +28,8 @@
 </template>
 
 <script>
+import screenfull from "screenfull";
+
 export default {
   data() {
     return {
@@ -32,7 +40,6 @@ export default {
         this.$route.params.chapterId +
         "/",
       pageNumber: "01",
-      isFullScreen: false,
     };
   },
   methods: {
@@ -48,24 +55,8 @@ export default {
         this.pageNumber = stringPageNumber;
       }
     },
-    toggleFullscreen() {
-      if (!this.isFullScreen) {
-        if (this.$el.requestFullscreen) {
-          this.$el.requestFullscreen();
-        } else if (this.$el.webkitRequestFullscreen) {
-          /* Safari */
-          this.$el.webkitRequestFullscreen();
-        }
-        this.isFullScreen = true;
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          /* Safari */
-          document.webkitExitFullscreen();
-        }
-        this.isFullScreen = false;
-      }
+    toggleFullscreen2() {
+      screenfull.toggle(this.$el);
     },
   },
   created() {},
@@ -102,15 +93,15 @@ export default {
 
 #top-control {
   height: 10em;
-  border: red solid 1px;
+  /*border: 1px red solid;*/
 }
 
 #right-control {
-  border: greenyellow solid 1px;
+  /*border: 1px greenyellow solid;*/
 }
 
 #left-control {
-  border: blue solid 1px;
+  /*border: 1px blue solid;*/
 }
 
 #left-right-control-container {
@@ -118,6 +109,6 @@ export default {
 }
 
 .columns {
-  margin: 0;
+  margin: 0 !important;
 }
 </style>
