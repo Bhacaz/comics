@@ -1,15 +1,22 @@
 <template>
   <div id="reader">
-    <div id="navigation">
-      <button class="button is-dark" @click="changePage(-1)">Previous</button>
-      <span>{{ parseInt(pageNumber) }}</span>
-      <button class="button is-dark" @click="toggleFullscreen()">
-        Fullscreen
-      </button>
-      <button class="button is-dark" @click="changePage(1)">Next</button>
-    </div>
     <div id="image-container">
       <img class="page" v-bind:src="baseComicPage + pageNumber + '.jpg'" />
+    </div>
+    <div id="overlay-control">
+      <div id="top-control" @click="toggleFullscreen()"></div>
+      <div id="left-right-control-container" class="columns">
+        <div
+          id="left-control"
+          class="column is-half"
+          @click="changePage(-1)"
+        ></div>
+        <div
+          id="right-control"
+          class="column is-half"
+          @click="changePage(1)"
+        ></div>
+      </div>
     </div>
   </div>
 </template>
@@ -67,10 +74,11 @@ export default {
 
 <style>
 #image-container {
-  height: calc(100vh - 40px);
+  height: 100vh;
   width: 100%;
   background-color: black;
   margin: 0;
+  padding-top: 3em;
 }
 
 .page {
@@ -79,14 +87,28 @@ export default {
   height: 100%;
 }
 
-#navigation {
-  display: flex;
-  justify-content: space-between;
-  background-color: black;
-  color: white;
-}
-
 #navigation button {
   width: 8em;
+}
+
+#reader {
+  display: grid;
+}
+
+#image-container,
+#overlay-control {
+  grid-area: 1 / 1;
+}
+
+#overlay-control {
+  height: 100vh;
+}
+
+#top-control {
+  height: 10em;
+}
+
+#left-right-control-container {
+  height: calc(100vh - 10em);
 }
 </style>
