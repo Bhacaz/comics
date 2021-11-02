@@ -8,13 +8,13 @@
         <div>
           <h2 class="title is-2">{{ comicData.title }}</h2>
         </div>
-        <div><strong>Summary:</strong> {{ comicData.summary }}</div>
-        <div><strong>Type:</strong> {{ comicData.type }}</div>
-        <div><strong>Release:</strong> {{ comicData.date_of_release }}</div>
-        <div><strong>Rating:</strong> {{ comicData.rating }}/5</div>
-        <div><strong>Status:</strong> {{ comicData.status }}</div>
+        <div><strong>Summary: </strong> {{ comicData.summary }}</div>
+        <div><strong>Type: </strong> {{ comicData.type }}</div>
+        <div><strong>Release: </strong> {{ comicData.date_of_release }}</div>
+        <div><strong>Rating: </strong> {{ comicData.rating }}/5</div>
+        <div><strong>Status: </strong> {{ comicData.status }}</div>
         <div>
-          <strong>Source:</strong>
+          <strong>Source: </strong>
           <a v-bind:href="`https://readcomicsonline.ru/comic/${comicData.id}`"
             >Read Comics Online</a
           >
