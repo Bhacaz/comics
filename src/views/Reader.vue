@@ -1,7 +1,7 @@
 <template>
   <div id="reader">
     <div id="image-container">
-      <img class="page" v-bind:src="baseComicPage + pageNumber + '.jpg'" />
+      <img class="page" v-bind:src="currentPage.pageUrl()" />
     </div>
     <div id="overlay-control">
       <div class="columns">
@@ -29,37 +29,38 @@
 
 <script>
 import screenfull from "screenfull";
+import ComicPage from "../models/comicPage";
 
 export default {
   data() {
     return {
-      baseComicPage:
-        "https://readcomicsonline.ru/uploads/manga/" +
-        this.$route.params.id +
-        "/chapters/" +
-        this.$route.params.chapterId +
-        "/",
-      pageNumber: "01",
+      currentPage: null,
     };
   },
   methods: {
     changePage(direction) {
-      let newPage = parseInt(this.pageNumber) + direction;
-      this.formattedPageNumber(newPage);
+      let newPage = this.currentPage.pageNumber + direction;
+      this.currentPage = new ComicPage(
+        this.$route.params.id,
+        this.$route.params.chapterId,
+        newPage
+      );
+      this.$router.replace(this.currentPage.readerPath());
     },
-    formattedPageNumber(newPage) {
-      const stringPageNumber = newPage.toString();
-      if (stringPageNumber.length === 1) {
-        this.pageNumber = "0" + stringPageNumber;
-      } else {
-        this.pageNumber = stringPageNumber;
-      }
+    initPage() {
+      this.currentPage = new ComicPage(
+        this.$route.params.id,
+        this.$route.params.chapterId,
+        Number.parseInt(this.$route.params.page)
+      );
     },
     toggleFullscreen2() {
       screenfull.toggle(this.$el);
     },
   },
-  created() {},
+  created() {
+    this.initPage();
+  },
 };
 </script>
 
