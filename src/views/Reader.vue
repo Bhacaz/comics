@@ -1,7 +1,7 @@
 <template>
   <div id="reader">
     <div id="image-container">
-      <img class="page" v-bind:src="currentPage.pageUrl()" />
+      <img class="page" v-bind:src="buffer.current().pageUrl" />
     </div>
     <div id="overlay-control">
       <div class="columns">
@@ -29,23 +29,25 @@
 
 <script>
 import screenfull from "screenfull";
-import ComicPage from "../models/comicPage";
+import ComicPage from "@/models/comicPage";
+import ImageBuffer from "@/models/imageBuffer";
 
 export default {
   data() {
     return {
       currentPage: null,
+      buffer: [],
     };
   },
   methods: {
     changePage(direction) {
-      let newPage = this.currentPage.pageNumber + direction;
-      this.currentPage = new ComicPage(
-        this.$route.params.id,
-        this.$route.params.chapterId,
-        newPage
-      );
-      this.$router.replace(this.currentPage.readerPath());
+      if (direction > 0) {
+        this.buffer.foward();
+      } else {
+        this.buffer.backward();
+      }
+      console.log(this.buffer);
+      this.$router.replace(this.buffer.current().readerPath());
     },
     initPage() {
       this.currentPage = new ComicPage(
@@ -53,6 +55,7 @@ export default {
         this.$route.params.chapterId,
         Number.parseInt(this.$route.params.page)
       );
+      this.buffer = new ImageBuffer(this.currentPage);
     },
     toggleFullscreen2() {
       screenfull.toggle(this.$el);
