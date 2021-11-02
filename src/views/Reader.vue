@@ -87,10 +87,6 @@ export default {
   height: 100%;
 }
 
-#navigation button {
-  width: 8em;
-}
-
 #reader {
   display: grid;
 }
@@ -106,9 +102,22 @@ export default {
 
 #top-control {
   height: 10em;
+  border: red solid 1px;
+}
+
+#right-control {
+  border: greenyellow solid 1px;
+}
+
+#left-control {
+  border: blue solid 1px;
 }
 
 #left-right-control-container {
   height: calc(100vh - 10em);
+}
+
+.columns {
+  margin: 0;
 }
 </style>

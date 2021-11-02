@@ -12,7 +12,7 @@ const routes = [
     component: Comic,
   },
   {
-    path: "/reader/:id/:chapterId",
+    path: "/reader/:id/:chapterId/:page",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Reader.vue"),
   },

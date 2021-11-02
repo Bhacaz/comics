@@ -17,7 +17,9 @@
   </section>
   <section class="section">
     <p v-for="chapter of comicData.chapters" v-bind:key="chapter.number">
-      <router-link :to="'/reader/' + comicData.id + '/' + chapter.number">
+      <router-link
+        :to="'/reader/' + comicData.id + '/' + chapter.number + '/1'"
+      >
         {{ chapter.name }}
       </router-link>
     </p>
