@@ -53,3 +53,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.hero.is-warning {
+  background-color: #fbe34c;
+}
+</style>
