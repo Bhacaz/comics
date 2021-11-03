@@ -73,7 +73,6 @@ export default {
   width: 100%;
   background-color: black;
   margin: 0;
-  padding-top: 3em;
 }
 
 .page {
