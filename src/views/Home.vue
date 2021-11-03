@@ -1,7 +1,13 @@
 <template>
   <section class="hero is-warning">
     <div class="hero-body">
-      <p class="title">Comics</p>
+      <p class="title">
+        <img
+          src="/img/manifest/icon-192x192-crop.png"
+          width="100px"
+          alt=""
+        /><span style="margin-left: -30px">omics</span>
+      </p>
       <p class="subtitle">Nice design from <em>readcomicsonline.ru</em></p>
     </div>
   </section>
