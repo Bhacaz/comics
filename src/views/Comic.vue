@@ -1,12 +1,12 @@
 <template>
-  <section class="section">
+  <section class="section" id="comic-data-section">
     <div v-if="comicData" class="columns">
       <div class="column is-one-third">
         <img v-bind:src="comicData.cover" />
       </div>
       <div class="column">
         <div>
-          <h2 class="title is-2">{{ comicData.title }}</h2>
+          <h2 class="title is-2" id="comic-title">{{ comicData.title }}</h2>
         </div>
         <div><strong>Summary: </strong> {{ comicData.summary }}</div>
         <div><strong>Type: </strong> {{ comicData.type }}</div>
@@ -67,5 +67,13 @@ export default {
 #chapters {
   display: flex;
   flex-wrap: wrap;
+}
+
+#comic-title {
+  padding-bottom: 1em;
+}
+
+#comic-data-section {
+  background: linear-gradient(180deg, #fbe34c 30%, #ffffff 30%);
 }
 </style>
