@@ -8,7 +8,7 @@
         <div
           id="top-control"
           class="column is-full"
-          @click="toggleFullscreen2()"
+          @click="toggleFullscreen()"
         ></div>
       </div>
       <div id="left-right-control-container" class="columns">
@@ -31,6 +31,7 @@
 import screenfull from "screenfull";
 import ComicPage from "@/models/comicPage";
 import ImageBuffer from "@/models/imageBuffer";
+import Progression from "@/models/progressionService";
 
 export default {
   data() {
@@ -48,6 +49,14 @@ export default {
       }
       console.log(this.buffer);
       this.$router.replace(this.buffer.current().readerPath());
+      this.updateProgression();
+    },
+    updateProgression() {
+      Progression.setProgression(
+        this.buffer.current().comicId,
+        this.buffer.current().chapterId,
+        this.buffer.current().pageNumber
+      );
     },
     initPage() {
       this.currentPage = new ComicPage(
@@ -56,8 +65,9 @@ export default {
         Number.parseInt(this.$route.params.page)
       );
       this.buffer = new ImageBuffer(this.currentPage);
+      this.updateProgression();
     },
-    toggleFullscreen2() {
+    toggleFullscreen() {
       screenfull.toggle(this.$el);
     },
   },

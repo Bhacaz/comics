@@ -30,9 +30,25 @@
       </router-link>
     </nav>
   </section>
+  <section class="section">
+    <p>Continue Reading</p>
+    <p
+      v-for="[comicId, progression] of Object.entries(getProgression())"
+      v-bind:key="comicId"
+    >
+      <router-link
+        :to="`/reader/${comicId}/${progression.chapterId}/${progression.pageNumber}`"
+        >{{
+          `${comicId} (chapter: ${progression.chapterId}, page: ${progression.pageNumber})`
+        }}</router-link
+      >
+    </p>
+  </section>
 </template>
 
 <script>
+import Progression from "@/models/progressionService";
+
 export default {
   name: "Home",
   components: {},
@@ -41,6 +57,9 @@ export default {
       search: null,
       searchResults: [],
     };
+  },
+  methods: {
+    ...Progression,
   },
   mounted() {
     this.$watch("search", () => {
