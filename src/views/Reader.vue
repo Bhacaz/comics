@@ -47,7 +47,6 @@ export default {
       } else {
         this.buffer.backward();
       }
-      console.log(this.buffer);
       this.$router.replace(this.buffer.current().readerPath());
       this.updateProgression();
     },

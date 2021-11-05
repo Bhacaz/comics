@@ -31,5 +31,8 @@ module.exports = {
         },
       ],
     },
+    workboxOptions: {
+      exclude: ["index.html"],
+    },
   },
 };
