@@ -30,7 +30,7 @@
       </router-link>
     </nav>
   </section>
-  <section class="section">
+  <section class="section" v-if="getProgression()">
     <p>Continue Reading</p>
     <p
       v-for="[comicId, progression] of Object.entries(getProgression())"
