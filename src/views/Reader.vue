@@ -11,7 +11,7 @@
           @click="toggleFullscreen()"
         ></div>
       </div>
-      <div id="left-right-control-container" class="columns">
+      <div id="left-right-control-container" class="columns is-mobile">
         <div
           id="left-control"
           class="column is-half"
