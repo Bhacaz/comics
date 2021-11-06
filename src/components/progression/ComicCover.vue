@@ -33,7 +33,7 @@ export default {
         .then((result) => (this.coverUrl = result.cover));
     },
     goToReader() {
-      this.$router.replace(
+      this.$router.push(
         `/reader/${this.comicId}/${this.progressionInfo.chapterId}/${this.progressionInfo.pageNumber}`
       );
     },
