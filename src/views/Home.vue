@@ -29,29 +29,27 @@
         {{ result.value }}
       </router-link>
     </nav>
-  </section>
-  <section class="section" v-if="getProgression()">
-    <p>Continue Reading</p>
-    <p
-      v-for="[comicId, progression] of Object.entries(getProgression())"
-      v-bind:key="comicId"
-    >
-      <router-link
-        :to="`/reader/${comicId}/${progression.chapterId}/${progression.pageNumber}`"
-        >{{
-          `${comicId} (chapter: ${progression.chapterId}, page: ${progression.pageNumber})`
-        }}</router-link
-      >
-    </p>
+    <div v-if="getProgression()">
+      <h6 class="title is-6">Continue Reading</h6>
+      <div class="columns is-mobile">
+        <ComicCover
+          v-for="[comicId, progression] of Object.entries(getProgression())"
+          :key="comicId"
+          :comicId="comicId"
+          :progressionInfo="progression"
+          class="column"
+        ></ComicCover>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
 import Progression from "@/models/progressionService";
-
+import ComicCover from "@/components/progression/ComicCover";
 export default {
   name: "Home",
-  components: {},
+  components: { ComicCover },
   data() {
     return {
       search: null,
@@ -76,5 +74,9 @@ export default {
 <style>
 .hero.is-warning {
   background-color: #fbe34c;
+}
+
+.progression-covers {
+  flex-wrap: wrap;
 }
 </style>

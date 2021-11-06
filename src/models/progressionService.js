@@ -14,7 +14,14 @@ function setProgression(comicId, chapterId, pageNumber) {
   localStorage.setItem("progression", JSON.stringify(currentProgression));
 }
 
+function removeProgression(comicId) {
+  let currentProgression = getProgression();
+  delete currentProgression[comicId];
+  localStorage.setItem("progression", JSON.stringify(currentProgression));
+}
+
 export default {
-  setProgression: setProgression,
-  getProgression: getProgression,
+  setProgression,
+  getProgression,
+  removeProgression,
 };
