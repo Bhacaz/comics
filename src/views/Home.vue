@@ -64,7 +64,7 @@ export default {
       fetch(process.env.VUE_APP_BASE_API + "/api/search?query=" + this.search)
         .then((res) => res.json())
         .then((result) => {
-          this.searchResults = result.slice(0, 10);
+          this.searchResults = result.slice(0, 50);
         });
     });
   },
