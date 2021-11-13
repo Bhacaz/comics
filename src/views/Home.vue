@@ -8,7 +8,7 @@
           alt=""
         /><span style="margin-left: -30px">omics</span>
       </p>
-      <p class="subtitle">Nice design from <em>readcomicsonline.ru</em></p>
+      <p class="subtitle">Nice design for <em>readcomicsonline.ru</em></p>
     </div>
   </section>
 
