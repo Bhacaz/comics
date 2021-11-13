@@ -33,9 +33,11 @@ export default {
         .then((result) => (this.coverUrl = result.cover));
     },
     goToReader() {
-      this.$router.push(
-        `/reader/${this.comicId}/${this.progressionInfo.chapterId}/${this.progressionInfo.pageNumber}`
-      );
+      this.$router.push(`/comic/${this.comicId}`).then(() => {
+        this.$router.push(
+          `/reader/${this.comicId}/${this.progressionInfo.chapterId}/${this.progressionInfo.pageNumber}`
+        );
+      });
     },
     removeFromProgressionList() {
       Progression.removeProgression(this.comicId);
