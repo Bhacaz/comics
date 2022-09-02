@@ -2,11 +2,10 @@
   <section class="hero is-warning">
     <div class="hero-body">
       <p class="title">
-        <img
-          src="/img/manifest/icon-192x192-crop.png"
-          width="100px"
-          alt=""
-        /><span style="margin-left: -30px">omics</span>
+        <img src="/img/manifest/icon-192x192.png" width="50px" alt="" /><span
+          style="margin-left: -10px"
+          >omics</span
+        >
       </p>
       <p class="subtitle">Nice design for <em>readcomicsonline.ru</em></p>
     </div>
